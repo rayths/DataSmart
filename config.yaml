@@ -1,0 +1,13 @@
+cookie:
+  expiry_days: 30
+  key: abcdef
+  name: data_smart
+credentials:
+  usernames:
+    raid:
+      email: raid.122450027@student.itera.ac.id
+      name: Raid Muhammad Naufal
+      password: $2b$12$Dg7xjZGxPDD1/BeuqsrG6e3OAIVxcNY3MK8k8.UFanHUAAAHzrC9q
+preauthorized:
+  emails:
+  - melsby@gmail.com
