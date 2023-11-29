@@ -44,7 +44,14 @@ def display_delete_jadwal(jadwal_conn, cursor_jadwal, jadwal):
             st.markdown(f"### __{row[3]}__")
             st.caption(f"{row[4]} - {row[5]}")
             st.text(f"{row[1]} ({row[2]}) | {row[6]}")
-            if st.button("Hapus"):
-                delete_jadwal(jadwal_conn, cursor_jadwal, row[1])
+            col1, col2 = st.columns(2)
+            with col1:
+                if st.button("Hapus"):
+                    delete_jadwal(jadwal_conn, cursor_jadwal, row[1])
+                    display_delete_jadwal(jadwal_conn, cursor_jadwal, jadwal)
+            with col2:
+                if st.button("Ubah"):
+                    pass
+                    
     else:
         st.write("Tidak ada jadwal yang ditemukan, silahkan tambahkan jadwal anda.")
