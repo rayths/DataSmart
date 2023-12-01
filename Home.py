@@ -222,35 +222,42 @@ if authentication_status:
         # option menu Data Notes
         elif selected_tab == "Data Notes":
             st.header(":blue[Data Notes]", divider="grey")
-            fitur = st.selectbox("Pilih Menu:", options=["Notes", "Tambah Notes"])
 
-            if fitur == "Notes":
-                st.subheader("Notes")
+            menu = st.radio("", ["Notes", "File"], "collapsed")
+            
+            if menu == "Notes":
+                fitur = st.selectbox("Pilih Menu:", options=["Notes", "Tambah Note", "Hapus & Ubah Notes"])
+                if fitur == "Notes":
+                    st.subheader("Notes")
+    
+                    note = notes_conn.execute("SELECT judul, notes, tanggal FROM notes WHERE username_db = ?", (username,)).fetchall()
+    
+                    if note:
+                        for row in note:
+                            judul, notes, tanggal = row
+                            st.markdown(f"#### __{judul}__")
+                            st.caption(f"{tanggal}")
+                            st.write(f'''<div style="text-align: justify">
+                                     {notes}
+                                     </div>''', unsafe_allow_html=True) 
+                            
+                    else:
+                        st.write("Belum ada data catatan. Silahkan buat catatan.")
+    
+                elif fitur == "Tambah Note":
+                    st.subheader("Tambah Notes")
+                    judul = st.text_input("Judul:")
+                    tanggal_notes = st.date_input("Tanggal:")
+                    notes = st.text_area("Masukkan teks anda disini:")
+    
+                    if st.button("Tambah"):
+                        with notes_conn:
+                            notes_conn.execute("INSERT INTO notes (judul, notes, tanggal, username_db) VALUES (?, ?, ?, ?)", (judul, notes, tanggal_notes, username))
+                            st.success("Notes berhasil ditambahkan")
 
-                note = notes_conn.execute("SELECT judul, notes, tanggal FROM notes WHERE username_db = ?", (username,)).fetchall()
-
-                if note:
-                    for row in note:
-                        judul, notes, tanggal = row
-                        st.markdown(f"#### __{judul}__")
-                        st.caption(f"{tanggal}")
-                        st.write(f'''<div style="text-align: justify">
-                                 {notes}
-                                 </div>''', unsafe_allow_html=True) 
-                        
-                else:
-                    st.write("Belum ada data catatan. Silahkan buat catatan.")
-
-            elif fitur == "Tambah Notes":
-                st.subheader("Tambah Notes")
-                judul = st.text_input("Judul:")
-                tanggal_notes = st.date_input("Tanggal:")
-                notes = st.text_area("Masukkan teks anda disini:")
-
-                if st.button("Tambah"):
-                    with notes_conn:
-                        notes_conn.execute("INSERT INTO notes (judul, notes, tanggal, username_db) VALUES (?, ?, ?, ?)", (judul, notes, tanggal_notes, username))
-                        st.success("Notes berhasil ditambahkan")
+                elif fitur == "Hapus & Ubah Notes":
+                    st.subheader("Hapus & Ubah Notes")
+                    
 
     if __name__ == "__main__":
         main()
