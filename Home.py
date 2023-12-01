@@ -264,7 +264,7 @@ if authentication_status:
                 if fitur == "Files":
                     st.subheader("Files")
 
-                elif fitur == "Tambah Files":
+                elif fitur == "Tambah File":
                     st.subheader("Tambah Files")
 
                 elif fitur == "Hapus Files":
