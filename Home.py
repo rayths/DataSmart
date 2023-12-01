@@ -223,7 +223,7 @@ if authentication_status:
         elif selected_tab == "Data Notes":
             st.header(":blue[Data Notes]", divider="grey")
 
-            menu = st.radio("", ["Notes", "File"], "collapsed")
+            menu = st.radio("", ["Notes", "File"], label_visibility="collapsed")
             
             if menu == "Notes":
                 fitur = st.selectbox("Pilih Menu:", options=["Notes", "Tambah Note", "Hapus & Ubah Notes"])
@@ -257,7 +257,18 @@ if authentication_status:
 
                 elif fitur == "Hapus & Ubah Notes":
                     st.subheader("Hapus & Ubah Notes")
-                    
+
+            elif menu == "File":
+                fitur = st.selectbox("Pilih Menu:", options=["Files", "Tambah File", "Hapus Files"])
+                
+                if fitur == "Files":
+                    st.subheader("Files")
+
+                elif fitur == "Tambah Files":
+                    st.subheader("Tambah Files")
+
+                elif fitur == "Hapus Files":
+                    st.subheader("Hapus Files")
 
     if __name__ == "__main__":
         main()
