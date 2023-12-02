@@ -7,7 +7,7 @@ import sqlite3 as sql
 import yaml
 from yaml.loader import SafeLoader
 from st_pages import Page, show_pages, add_page_title, hide_pages
-from func import search_jadwal, display_jadwal, display_delete_update_jadwal, delete_jadwal
+from func import search_jadwal, display_jadwal, display_delete_update_jadwal, display_notes, display_delete_update_notes
 
 # set tampilan tab pada browser
 logo = Image.open("Logo.png")
@@ -231,18 +231,8 @@ if authentication_status:
                     st.subheader("Notes")
     
                     note = notes_conn.execute("SELECT judul, notes, tanggal FROM notes WHERE username_db = ?", (username,)).fetchall()
-    
-                    if note:
-                        for row in note:
-                            judul, notes, tanggal = row
-                            st.markdown(f"#### __{judul}__")
-                            st.caption(f"{tanggal}")
-                            st.write(f'''<div style="text-align: justify">
-                                     {notes}
-                                     </div>''', unsafe_allow_html=True) 
-                            
-                    else:
-                        st.write("Belum ada data catatan. Silahkan buat catatan.")
+
+                    display_notes(note)
     
                 elif fitur == "Tambah Note":
                     st.subheader("Tambah Notes")
@@ -258,14 +248,21 @@ if authentication_status:
                 elif fitur == "Hapus & Ubah Notes":
                     st.subheader("Hapus & Ubah Notes")
 
+                    cursor_notes = notes_conn.cursor()
+                    note = notes_conn.execute("SELECT judul, notes, tanggal FROM notes WHERE username_db = ?", (username,)).fetchall()
+
+                    display_delete_update_notes(notes_conn, cursor_notes, note)
+
             elif menu == "File":
                 fitur = st.selectbox("Pilih Menu:", options=["Files", "Tambah File", "Hapus Files"])
                 
                 if fitur == "Files":
                     st.subheader("Files")
-
+                    
+                    
                 elif fitur == "Tambah File":
-                    st.subheader("Tambah Files")
+                    st.subheader("Tambah File")
+                    
 
                 elif fitur == "Hapus Files":
                     st.subheader("Hapus Files")
