@@ -1,5 +1,6 @@
 import streamlit as st
 
+# Fungsi menu jadwal
 def search_jadwal(cursor_jadwal, keyword, username): # fungsi search
     query = "SELECT * FROM jadwal_kelas WHERE jadwal = ? AND username_db = ?"
     result = cursor_jadwal.execute(query, (keyword, username,)).fetchall()
@@ -44,7 +45,7 @@ def display_delete_update_jadwal(jadwal_conn, cursor_jadwal, jadwal):
             st.markdown(f"### __{row[3]}__")
             st.caption(f"{row[4]} - {row[5]}")
             st.text(f"{row[1]} ({row[2]}) | {row[6]}")
-            col1, col2 = st.columns([0.1, 0.9])
+            col1, col2 = st.columns([0.9, 0.1])
             with col1:
                 if st.button("Hapus"):
                     delete_jadwal(jadwal_conn, cursor_jadwal, row[1])
@@ -53,3 +54,44 @@ def display_delete_update_jadwal(jadwal_conn, cursor_jadwal, jadwal):
                     pass
     else:
         st.write("Tidak ada jadwal yang ditemukan, silahkan tambahkan jadwal anda.")
+
+
+# Fungsi menu notes
+def display_notes(note):
+    if note:
+        for row in note:
+            judul, notes, tanggal = row
+            st.markdown(f"#### __{judul}__")
+            st.caption(f"{tanggal}")
+            st.write(f'''<div style="text-align: justify">
+                        {notes}
+                        </div>''', unsafe_allow_html=True) 
+            
+    else:
+        st.write("Belum ada data catatan. Silahkan buat catatan.")
+
+def delete_notes(notes_conn, cursor_notes, note):
+    query = "DELETE FROM notes WHERE judul = ?"
+    cursor_notes.execute(query, (note,))
+    notes_conn.commit()
+    st.success("Catatan berhasil dihapus")
+
+def display_delete_update_notes(notes_conn, cursor_notes, note):
+    if note:
+        for row in note:
+            judul, notes, tanggal = row
+            st.markdown(f"#### __{judul}__")
+            st.caption(f"{tanggal}")
+            st.write(f'''<div style="text-align: justify">
+                        {notes}
+                        </div>''', unsafe_allow_html=True) 
+            
+            col1, col2 = st.columns([0.9, 0.1])
+            with col1:
+                if st.button("Hapus"):
+                    delete_notes(notes_conn, cursor_notes, judul)
+            with col2:
+                if st.button("Ubah"):
+                    pass
+    else:
+        st.write("Belum ada data catatan. Silahkan buat catatan.")
