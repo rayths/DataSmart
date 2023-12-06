@@ -129,7 +129,7 @@ if authentication_status:
                         with st.expander("Keterangan: "):
                             st.write(f"{keterangan}")
 
-                        Done = st.button("Done")
+                        Done = st.button("Done", key="done")
 
                         if Done:
                             with tugas_conn:
