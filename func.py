@@ -13,19 +13,22 @@ def display_jadwal(jadwal):
             st.caption(f"{row[4]} - {row[5]}")
             st.text(f"{row[1]} ({row[2]}) | {row[6]}")
             
-def display_search_jadwal(jadwal, jadwal_conn, username): # fungsi display
-    if jadwal:
-        for row in jadwal:
+def display_search_jadwal(jadwal, jadwal_conn, username):
+    sorted_jadwal = sorted(jadwal, key=lambda x: x[3])
+
+    if sorted_jadwal:
+        for row in sorted_jadwal:
             st.markdown(f"### __{row[3]}__")
             st.caption(f"{row[4]} - {row[5]}")
             st.text(f"{row[1]} ({row[2]}) | {row[6]}")
     else:
         st.warning("Tidak ada jadwal yang ditemukan, silahkan tambahkan jadwal anda.")
 
-        jadwal_sort = jadwal_conn.execute("SELECT * FROM jadwal_kelas WHERE username_db = ? ORDER BY jadwal ASC", (username,)).fetchall() # inisalisi jadwal sort
-
+        # Display the sorted jadwal in case nothing is found
+        jadwal_sort = jadwal_conn.execute("SELECT * FROM jadwal_kelas WHERE username_db = ? ORDER BY jadwal ASC", (username,)).fetchall()
         st.write("Jadwal Mingguan Anda:")
         display_jadwal(jadwal_sort)
+
 
 def delete_jadwal(jadwal_conn, cursor_jadwal, jadwal):
     query = "DELETE FROM jadwal_kelas WHERE mata_kuliah = ?"
