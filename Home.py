@@ -129,7 +129,9 @@ if authentication_status:
                         with st.expander("Keterangan: "):
                             st.write(f"{keterangan}")
 
-                        if st.button("Done"):
+                        Done = st.button("Done")
+
+                        if Done:
                             with tugas_conn:
                                 tugas_conn.execute("DELETE FROM tugas WHERE nama_tugas = ?", (nama_tugas,))
                             st.success("Selamat Tugas Anda Sudah Selesai, Silahkan Kerjakan Tugas Lainnyaa!")
