@@ -8,6 +8,11 @@ import yaml
 from yaml.loader import SafeLoader
 from st_pages import Page, show_pages, add_page_title, hide_pages
 from func import search_jadwal, display_jadwal, display_delete_update_jadwal, display_notes, display_delete_update_notes
+import socket
+
+def guard(*args, **kwargs):
+    print("Internet Blocked")
+socket.socket = guard
 
 # set tampilan tab pada browser
 logo = Image.open("Logo.png")
