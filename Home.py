@@ -256,15 +256,21 @@ if authentication_status:
                 
                 if fitur == "Files":
                     st.subheader("Files")
-                    st.image('pngegg.png', use_column_width=True)
+                    st.write('''<div style="text-align:center">
+                         <img src="pngegg.png" width="300">
+                         </div>''', unsafe_allow_html=True)
                     
                 elif fitur == "Tambah File":
                     st.subheader("Tambah File")
-                    st.image('pngegg.png', use_column_width=True)
+                    st.write('''<div style="text-align:center">
+                         <img src="pngegg.png" width="300">
+                         </div>''', unsafe_allow_html=True)
 
                 elif fitur == "Hapus Files":
                     st.subheader("Hapus Files")
-                    st.image('pngegg.png', use_column_width=True)
+                    st.write('''<div style="text-align:center">
+                         <img src="pngegg.png" width="300">
+                         </div>''', unsafe_allow_html=True)
 
     if __name__ == "__main__":
         main()
