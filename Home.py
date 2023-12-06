@@ -257,19 +257,19 @@ if authentication_status:
                 if fitur == "Files":
                     st.subheader("Files")
                     st.write('''<div style="text-align:center">
-                         <img src="http://drive.google.com/uc?export=view&id=1rnaisyTWIaOr0vmX2qM_zQ4NtSE_oePT" width="300">
+                         <img src="http://drive.google.com/uc?export=view&id=1rnaisyTWIaOr0vmX2qM_zQ4NtSE_oePT" width="700">
                          </div>''', unsafe_allow_html=True)
                     
                 elif fitur == "Tambah File":
                     st.subheader("Tambah File")
                     st.write('''<div style="text-align:center">
-                         <img src="http://drive.google.com/uc?export=view&id=1rnaisyTWIaOr0vmX2qM_zQ4NtSE_oePT" width="300">
+                         <img src="http://drive.google.com/uc?export=view&id=1rnaisyTWIaOr0vmX2qM_zQ4NtSE_oePT" width="700">
                          </div>''', unsafe_allow_html=True)
 
                 elif fitur == "Hapus Files":
                     st.subheader("Hapus Files")
                     st.write('''<div style="text-align:center">
-                         <img src="http://drive.google.com/uc?export=view&id=1rnaisyTWIaOr0vmX2qM_zQ4NtSE_oePT" width="300">
+                         <img src="http://drive.google.com/uc?export=view&id=1rnaisyTWIaOr0vmX2qM_zQ4NtSE_oePT" width="700">
                          </div>''', unsafe_allow_html=True)
 
     if __name__ == "__main__":
