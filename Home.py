@@ -52,11 +52,9 @@ name, authentication_status, username = authenticator.login("Login", "main")
 
 # status autentikasi
 if authentication_status == False:
-    hide_pages(["Setting"])
     st.error("Username/Password salah")
 
 if authentication_status == None:
-    hide_pages(["Setting"])
     st.warning("Masukan Username dan Password")
     st.write("Jika Anda belum memiliki akun, silahkan daftar.")   
 
