@@ -50,7 +50,7 @@ def display_delete_update_jadwal(jadwal_conn, cursor_jadwal, jadwal):
             st.text(f"{row[1]} ({row[2]}) | {row[6]}")
             col1, col2 = st.columns([0.9, 0.1])
             with col1:
-                if st.button("Hapus", key=f"{row[0]}"):
+                if st.button("Hapus", key=f"{row[1]}"):
                     delete_jadwal(jadwal_conn, cursor_jadwal, row[1])
             with col2:
                 if st.button("Ubah", key=f"{row[0]}"):
