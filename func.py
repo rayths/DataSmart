@@ -50,10 +50,10 @@ def display_delete_update_jadwal(jadwal_conn, cursor_jadwal, jadwal):
             st.text(f"{row[1]} ({row[2]}) | {row[6]}")
             col1, col2 = st.columns([0.9, 0.1])
             with col1:
-                if st.button("Hapus", key=f"{row[3]}"):
+                if st.button("Hapus", key=f"{row[0]}"):
                     delete_jadwal(jadwal_conn, cursor_jadwal, row[1])
             with col2:
-                if st.button("Ubah"):
+                if st.button("Ubah", key=f"{row[0]}"):
                     pass
     else:
         st.write("Tidak ada jadwal yang ditemukan, silahkan tambahkan jadwal anda.")
@@ -94,7 +94,7 @@ def display_delete_update_notes(notes_conn, cursor_notes, note):
                 if st.button("Hapus", key=f"{judul}"):
                     delete_notes(notes_conn, cursor_notes, judul)
             with col2:
-                if st.button("Ubah"):
+                if st.button("Ubah", key=f"{notes}"):
                     pass
     else:
         st.write("Belum ada data catatan. Silahkan buat catatan.")
